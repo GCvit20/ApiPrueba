@@ -9,7 +9,7 @@ const Navbar = () => {
 
 	const navigate = useNavigate();
 	const location = useLocation(); 
-	const { onLogout, isLogged } = useAuthContext();
+	const { onLogout } = useAuthContext();
 	
 	const handleLogin = () => {
 		navigate("/login");
@@ -33,25 +33,18 @@ const Navbar = () => {
     };
 
 	const isLoginPage = location.pathname === "/login";
+	const isHomePage = location.pathname === "/home";
+	const isAddPage = location.pathname === "/add";
+	const isEmployeePage = location.pathname === "/employee";
+	const isLandingPage = location.pathname === "/";
 
-	useEffect(() => {
-		if (isLoginPage && isLogged) {
-			navigate("/home");
-		}
-	}, [isLoginPage, isLogged, navigate]);
+	const isDynamicPage = location.pathname.split('/').length > 1 && location.pathname.split('/')[1].length > 0;
 
-	 const isHomePage = location.pathname === "/home";
-	 const isAddPage = location.pathname === "/add";
-	 const isEmployeePage = location.pathname === "/employee";
-	 const isLandingPage = location.pathname === "/";
+	const showBackButton = isHomePage || isAddPage || isDynamicPage;
 
-	 const isDynamicPage = location.pathname.split('/').length > 1 && location.pathname.split('/')[1].length > 0;
-   
-	 const showBackButton = isHomePage || isAddPage || isDynamicPage;
-   
-	 const showLoginButton = !(isHomePage || isAddPage || isDynamicPage);
-	 const showLogoutButton = isHomePage || isEmployeePage;
-	 const showEmployeeLink = !(isLandingPage || isLoginPage);
+	const showLoginButton = !(isHomePage || isAddPage || isDynamicPage);
+	const showLogoutButton = isHomePage || isEmployeePage;
+	const showEmployeeLink = !(isLandingPage || isLoginPage);
 
 	return (
 	  <div className={styles.navbar}>
