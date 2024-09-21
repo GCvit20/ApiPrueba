@@ -3,14 +3,20 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useAuth } from '../../hooks';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
 
 	const navigate = useNavigate();
 	const location = useLocation(); 
-	const { onLogout } = useAuth();
+	const { onLogout, isLogged } = useAuthContext();
 
+	useEffect(() => {
+		if (isLoginPage && isLogged) {
+			navigate("/home");
+		}
+	}, [isLoginPage, isLogged, navigate]);
+	
 	const handleLogin = () => {
 		navigate("/login");
 	}
