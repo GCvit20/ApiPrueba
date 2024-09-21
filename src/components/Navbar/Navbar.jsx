@@ -3,13 +3,13 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../hooks';
 
 const Navbar = () => {
 
 	const navigate = useNavigate();
 	const location = useLocation(); 
-	const { onLogout } = useAuthContext();
+	const { onLogout } = useAuth;
 	
 	const handleLogin = () => {
 		navigate("/login");
