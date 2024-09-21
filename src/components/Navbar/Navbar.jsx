@@ -9,14 +9,8 @@ const Navbar = () => {
 
 	const navigate = useNavigate();
 	const location = useLocation(); 
-	const { onLogout, isLogged } = useAuth();
+	const { onLogout } = useAuth();
 
-	useEffect(() => {
-		if (isLoginPage && isLogged) {
-			navigate("/home");
-		}
-	}, [isLoginPage, isLogged, navigate]);
-	
 	const handleLogin = () => {
 		navigate("/login");
 	}
