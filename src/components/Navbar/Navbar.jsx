@@ -10,12 +10,6 @@ const Navbar = () => {
 	const navigate = useNavigate();
 	const location = useLocation(); 
 	const { onLogout, isLogged } = useAuthContext();
-
-	useEffect(() => {
-		if (isLoginPage && isLogged) {
-			navigate("/home");
-		}
-	}, [isLoginPage, isLogged, navigate]);
 	
 	const handleLogin = () => {
 		navigate("/login");
@@ -38,11 +32,17 @@ const Navbar = () => {
         navigate(-1);
     };
 
-	
+	const isLoginPage = location.pathname === "/login";
+
+	useEffect(() => {
+		if (isLoginPage && isLogged) {
+			navigate("/home");
+		}
+	}, [isLoginPage, isLogged, navigate]);
+
 	 const isHomePage = location.pathname === "/home";
 	 const isAddPage = location.pathname === "/add";
 	 const isEmployeePage = location.pathname === "/employee";
-	 const isLoginPage = location.pathname === "/login";
 	 const isLandingPage = location.pathname === "/";
 
 	 const isDynamicPage = location.pathname.split('/').length > 1 && location.pathname.split('/')[1].length > 0;
